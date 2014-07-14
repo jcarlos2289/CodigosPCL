@@ -1,0 +1,1 @@
+/home/rovit/Documentos/PCLPruebasDescriptores/SPIN/build/CMakeFiles/spin.dir
