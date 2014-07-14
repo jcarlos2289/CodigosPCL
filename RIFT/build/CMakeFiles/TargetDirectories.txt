@@ -1,0 +1,1 @@
+/home/rovit/Documentos/PCLPruebasDescriptores/RIFT/build/CMakeFiles/rift.dir
