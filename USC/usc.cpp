@@ -299,12 +299,13 @@ int main (int argc, char *argv[])
     if (!pcl_isfinite (scene_descriptors->at (i).descriptor[0])) //skipping NaNs
     {
       continue;
-    }
+    }//aki cmabie el valor de la distancia de los vecinos--------------------------------------------------------------------------------
     int found_neighs = match_search.nearestKSearch (scene_descriptors->at (i), 1, neigh_indices, neigh_sqr_dists);
     if(found_neighs == 1 && neigh_sqr_dists[0] < 0.25f) //  add match only if the squared descriptor distance is less than 0.25 (SHOT descriptor distances are between 0 and 1 by design)
     {
       pcl::Correspondence corr (neigh_indices[0], static_cast<int> (i), neigh_sqr_dists[0]);
-      model_scene_corrs->push_back (corr);
+      model_scene_corrs->push_back (corr); 
+      std::cout << "Found " <<i <<"\n" << std::endl;
     }
   }
   std::cout << "Correspondences found: " << model_scene_corrs->size () << std::endl;

@@ -349,7 +349,8 @@ int main (int argc, char *argv[])
   pcl::KdTreeFLANN<DescriptorType> match_search;
   match_search.setInputCloud (model_descriptors);
 
-  //  For each scene keypoint descriptor, find nearest neighbor into the model keypoints descriptor cloud and add it to the correspondences vector.
+  //  For each scene keypoint descriptor, find nearest neighbor into the model keypoints descriptor cloud and add 
+  //it to the correspondences vector.
   for (size_t i = 0; i < scene_descriptors->size (); ++i)
   {
     std::vector<int> neigh_indices (1);
@@ -357,9 +358,9 @@ int main (int argc, char *argv[])
     if (!pcl_isfinite (scene_descriptors->at (i).histogram[0])) //skipping NaNs
     {
       continue;
-    }
+    }//aki cmabie el valor de la distancia de los vecinos--------------------------------------------------------------------------------
     int found_neighs = match_search.nearestKSearch (scene_descriptors->at (i), 1, neigh_indices, neigh_sqr_dists);
-    if(found_neighs == 1 && neigh_sqr_dists[0] < 0.25f) //  add match only if the squared descriptor distance is less than 0.25 (SHOT descriptor distances are between 0 and 1 by design)
+    if(found_neighs == 1 && neigh_sqr_dists[0] < 0.50f) //  add match only if the squared descriptor distance is less than 0.25 (SHOT descriptor distances are between 0 and 1 by design)
     {
       pcl::Correspondence corr (neigh_indices[0], static_cast<int> (i), neigh_sqr_dists[0]);
       model_scene_corrs->push_back (corr);
